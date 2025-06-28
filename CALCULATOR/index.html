@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CALCULATOR</title>
+<style>
+  body {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  video {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1;
+  }
+
+  #main{
+    background-image: url(images/bg.mp4);
+    border-radius: 25px;
+    padding: 90px;
+    box-shadow: 0px 0px 100px rgb(17, 241, 222);
+    color:rgb(242, 249, 241);
+  }
+  .calci{
+    position:absolute;
+    right:560px;
+    top:60px;
+  }
+  #display {
+    font-size: 1rem;
+    margin-bottom: 100 px; 
+    grid-column:span 4;
+    text-align: right;
+    padding: 10px; 
+    margin-bottom: 20px
+  }
+
+  button {
+    font-size: 0.9em; 
+    padding: 20px;
+    background-color: #c5c6c4; 
+    color: rgb(23, 79, 42);
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  button:hover {
+    background-color: #f8f4d1;
+  }
+</style>
+</head>
+<body>
+  <video autoplay loop muted>
+    <source src="images/bg.mp4" type="video/mp4">
+  </video>
+
+  <div id="main">
+    <h2 class="calci">CALCULATOR</h2>
+    <input type="text" id="display" disabled>
+    <div>
+      <button onclick="appendNumber(1)">1</button>
+      <button onclick="appendNumber(2)">2</button>
+      <button onclick="appendNumber(3)">3</button>
+      <button onclick="appendOperator('+')">+</button>
+    </div>
+    <div>
+      <button onclick="appendNumber(4)">4</button>
+      <button onclick="appendNumber(5)">5</button>
+      <button onclick="appendNumber(6)">6</button>
+      <button onclick="appendOperator('-')">-</button>
+    </div>
+    <div>
+      <button onclick="appendNumber(7)">7</button>
+      <button onclick="appendNumber(8)">8</button>
+      <button onclick="appendNumber(9)">9</button>
+      <button onclick="appendOperator('*')">*</button>
+    </div>
+    <div>
+      <button onclick="appendNumber(0)">0</button>
+      <button onclick="clearDisplay()">C</button>
+      <button onclick="calculate()">=</button>
+      <button onclick="appendOperator('/')">/</button>
+    </div>
+  </div>
+
+<script>
+  let displayValue = '';
+
+  function appendNumber(number) {
+    displayValue += number;
+    document.getElementById('display').value = displayValue;
+  }
+
+  function appendOperator(operator) {
+    displayValue += operator;
+    document.getElementById('display').value = displayValue;
+  }
+
+  function clearDisplay() {
+    displayValue = '';
+    document.getElementById('display').value = '';
+  }
+
+  function calculate() {
+    try {
+      displayValue = eval(displayValue);
+      document.getElementById('display').value = displayValue;
+    } catch (error) {
+      document.getElementById('display').value = 'Error';
+    }
+  }
+</script>
+</body>
+</html>
